@@ -1,0 +1,35 @@
+{% extends "authapp/base.html" %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'authapp:quote' %}">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {% if field.name == 'author' %}
+        <select class="form-select" id="{{ field.id_for_label }}" name="{{ field.html_name }}">
+            <option value="" disabled selected>Choose an author</option>
+            {% for author in authors %}
+            <option value="{{ author.id }}">{{ author.fullname }}</option>
+            {% endfor %}
+        </select>
+        {% else %}
+        {{ field }}
+        {% endif %}
+        {% if field.errors %}
+        <div>
+            {{ field.errors }} 
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+   
+</form>
+
+{% endblock %}

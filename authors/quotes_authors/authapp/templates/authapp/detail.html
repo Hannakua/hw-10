@@ -1,0 +1,10 @@
+{% extends "authapp/base.html" %}
+
+{% block content %}
+
+<h4>{{ author.fullname }}</h4>
+<p>was born on : {{ author.born_date }} in {{ author.born_location }}</p>
+<p>About author: {{ author.description }}</p>
+
+
+{% endblock %}
