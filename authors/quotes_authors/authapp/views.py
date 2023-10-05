@@ -111,6 +111,7 @@ def load_quotes_authors(request):
         for quo in quotes_db:
             author, data = Author.objects.get_or_create(fullname=quo["author"])
 
-            Quote.objects.create(quote=quo["quote"], author=author)
+            Quote.objects.create(quote=quo["quote"], author=author, tags=quo["tags"])
 
     return redirect(to="authapp:main")
+
